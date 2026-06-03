@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name ✦</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;1,9..144,300;1,9..144,700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --lav:    #C0B4DC;
+  --lav2:   #D8D0EE;
+  --lav3:   #EEEAF8;
+  --lav4:   #F6F3FC;
+  --sage:   #B4C4AC;
+  --sage2:  #D0DCC8;
+  --sage3:  #EAF0E6;
+  --pink:   #E4BED0;
+  --pink2:  #F2DDE8;
+  --blue:   #A8BAD0;
+  --blue2:  #C8D6E4;
+  --linen:  #F4F0E8;
+  --ink:    #201C2C;
+  --mid:    #68607C;
+  --soft:   #9C94B0;
+  --div:    #DCD4EC;
+  --bg:     #F8F5FC;
+  --acc:    #5A4878; /* deep lavender — the punch */
+  --acc-g:  #486040; /* deep sage */
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'DM Mono',monospace;
+  font-weight:300;
+  font-size:13px;
+  line-height:1.75;
+  cursor:none;
+  overflow-x:hidden;
+}
+
+/* ── CURSOR ─────────────────────────── */
+#cur{
+  position:fixed;pointer-events:none;z-index:9999;
+  width:9px;height:9px;border-radius:50%;
+  background:var(--lav);
+  transform:translate(-50%,-50%);
+  transition:width .18s,height .18s,background .18s;
+  mix-blend-mode:multiply;
+}
+#cur.big{width:38px;height:38px;background:var(--lav2);}
+#cur-ring{
+  position:fixed;pointer-events:none;z-index:9998;
+  width:30px;height:30px;
+  border:1px solid var(--lav);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  opacity:.4;
+}
+
+/* ── TOP STRIP ───────────────────────── */
+.top-strip{
+  background:var(--acc);
+  padding:8px 0;overflow:hidden;
+}
+.strip-inner{
+  display:flex;white-space:nowrap;
+  animation:stripScroll 28s linear infinite;
+}
+@keyframes stripScroll{to{transform:translateX(-50%)}}
+.strip-bit{
+  display:inline-flex;align-items:center;gap:14px;
+  padding:0 22px;
+  font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--lav2);
+}
+.strip-sep{color:var(--lav);opacity:.5;}
+
+/* ── NAV ─────────────────────────────── */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(248,245,252,.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--div);
+  padding:0 56px;height:48px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-family:'Fraunces',serif;
+  font-size:1.05rem;font-weight:700;font-style:italic;
+  color:var(--acc);
+}
+.nav-right{display:flex;align-items:center;gap:28px;}
+.nav-links{display:flex;gap:24px;}
+.nav-links a{
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--soft);text-decoration:none;cursor:none;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--acc);}
+
+/* language switcher */
+.lang-switch{
+  display:flex;
+  border:1px solid var(--div);
+  overflow:hidden;
+}
+.lang-btn{
+  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 10px;
+  background:transparent;border:none;
+  color:var(--soft);cursor:none;
+  transition:background .2s,color .2s;
+  font-family:'DM Mono',monospace;
+}
+.lang-btn.active{
+  background:var(--acc);color:#fff;
+}
+
+/* ── HERO ────────────────────────────── */
+.hero{
+  min-height:92vh;
+  display:grid;
+  grid-template-columns:1fr 360px;
+  align-items:center;
+  padding:64px 56px 48px;
+  gap:48px;
+  position:relative;overflow:hidden;
+}
+
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 26px,rgba(192,180,220,.05) 26px,rgba(192,180,220,.05) 27px),
+    repeating-linear-gradient(90deg,transparent,transparent 26px,rgba(192,180,220,.05) 26px,rgba(192,180,220,.05) 27px);
+  pointer-events:none;
+}
+
+.hero-blob{
+  position:absolute;
+  width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,var(--lav3) 0%,var(--sage3) 50%,transparent 75%);
+  right:-120px;top:50%;transform:translateY(-50%);
+  pointer-events:none;z-index:0;
+  animation:breathe 8s ease-in-out infinite alternate;
+}
+@keyframes breathe{from{transform:translateY(-50%) scale(1);}to{transform:translateY(-50%) scale(1.06);}}
+
+/* deco rings */
+.deco-ring{
+  position:absolute;border:1px solid var(--lav2);
+  border-radius:50%;pointer-events:none;z-index:0;
+  animation:spinSlow 25s linear infinite;opacity:.3;
+}
+@keyframes spinSlow{to{transform:rotate(360deg)}}
+
+.hero-left{position:relative;z-index:1;}
+.hero-right{position:relative;z-index:1;}
+
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--acc);margin-bottom:22px;
+  background:var(--lav3);border:1px solid var(--lav2);
+  padding:5px 14px;
+}
+.kicker-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--lav);
+  animation:kpulse 2s ease-in-out infinite;
+}
+@keyframes kpulse{0%,100%{opacity:1}50%{opacity:.2}}
+
+h1.hero-h{
+  font-family:'Fraunces',serif;
+  font-size:clamp(3rem,6vw,5rem);
+  font-weight:700;line-height:.95;
+  letter-spacing:-.03em;color:var(--ink);
+  margin-bottom:26px;
+}
+h1.hero-h em{font-style:italic;font-weight:300;color:var(--acc);}
+h1.hero-h .ghost{-webkit-text-stroke:1.5px var(--lav);color:transparent;}
+
+.hero-desc{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+  font-size:1.1rem;line-height:1.85;
+  color:var(--mid);max-width:420px;margin-bottom:36px;
+}
+.hero-desc strong{font-style:normal;font-weight:700;color:var(--ink);}
+
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+
+.btn-primary{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--acc);color:var(--lav3);
+  padding:13px 28px;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  text-decoration:none;cursor:none;border:1px solid var(--acc);
+  transition:background .25s;position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:var(--lav);transform:translateX(-105%);
+  transition:transform .3s ease;z-index:0;
+}
+.btn-primary:hover::after{transform:translateX(0);}
+.btn-primary span,.btn-primary svg{position:relative;z-index:1;}
+
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--soft);padding:13px 22px;
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  text-decoration:none;cursor:none;
+  border:1px solid var(--div);transition:border-color .25s,color .25s;
+}
+.btn-ghost:hover{border-color:var(--lav);color:var(--acc);}
+
+/* ── HERO CARD ───────────────────────── */
+.hero-card{
+  background:var(--lav4);border:1px solid var(--div);
+  position:relative;
+}
+.hero-card::before{
+  content:'';position:absolute;
+  top:-5px;left:-5px;right:5px;bottom:5px;
+  border:1px solid var(--lav2);z-index:-1;
+}
+.card-top{
+  background:var(--lav3);border-bottom:1px solid var(--div);
+  padding:11px 20px;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--acc);display:flex;align-items:center;justify-content:space-between;
+}
+.card-dot{width:6px;height:6px;border-radius:50%;background:var(--lav);animation:kpulse 2s ease-in-out infinite;}
+.card-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:11px 20px;border-bottom:1px solid var(--div);font-size:12px;gap:12px;
+}
+.card-row:last-child{border-bottom:none;}
+.card-k{color:var(--soft);}
+.card-v{color:var(--ink);text-align:right;font-family:'Fraunces',serif;font-style:italic;font-size:.95rem;}
+.card-v.hi{color:var(--acc);}
+
+/* ── COLOUR BAND ─────────────────────── */
+.band{
+  overflow:hidden;padding:11px 0;
+  background:linear-gradient(90deg,var(--lav) 0%,var(--lav2) 40%,var(--sage2) 70%,var(--pink2) 100%);
+}
+.band-inner{
+  display:flex;white-space:nowrap;
+  animation:stripScroll 20s linear infinite;
+}
+.band-word{
+  display:inline-flex;align-items:center;gap:18px;padding:0 22px;
+  font-family:'Fraunces',serif;font-size:clamp(.85rem,1.5vw,1.05rem);
+  font-weight:700;font-style:italic;color:rgba(255,255,255,.9);
+}
+.band-sep{font-style:normal;opacity:.5;}
+
+/* ── SECTIONS ────────────────────────── */
+.section{padding:72px 56px;max-width:1000px;margin:0 auto;}
+hr.rule{border:none;border-top:1px solid var(--div);margin:0 56px;}
+
+.sec-tag{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--acc);margin-bottom:10px;
+  display:flex;align-items:center;gap:10px;
+}
+.sec-tag::before{content:'';display:inline-block;width:16px;height:1px;background:var(--lav);}
+
+.sec-title{
+  font-family:'Fraunces',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);
+  font-weight:700;line-height:1.05;color:var(--ink);
+  margin-bottom:40px;letter-spacing:-.02em;
+}
+.sec-title em{font-style:italic;font-weight:300;color:var(--acc);}
+
+/* ── ABOUT ───────────────────────────── */
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;border:1px solid var(--div);
+}
+.about-left{
+  padding:44px 40px;border-right:1px solid var(--div);background:#fff;
+}
+.about-right{
+  padding:44px 40px;background:var(--lav4);position:relative;overflow:hidden;
+}
+.about-right::after{
+  content:'✦';position:absolute;bottom:-30px;right:-10px;
+  font-size:10rem;color:rgba(192,180,220,.1);pointer-events:none;
+  font-family:'Fraunces',serif;
+}
+.about-body{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+  font-size:1rem;line-height:1.9;color:var(--ink);
+}
+.about-body p+p{margin-top:.85em;}
+.about-body strong{font-style:normal;font-weight:700;color:var(--acc);}
+
+.fact-list{list-style:none;position:relative;z-index:1;}
+.fact-item{
+  padding:11px 0;border-bottom:1px solid var(--div);
+  display:grid;grid-template-columns:22px 1fr;gap:10px;
+}
+.fact-item:last-child{border-bottom:none;}
+.fact-ico{font-size:.9rem;margin-top:1px;}
+.fact-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--lav);margin-bottom:1px;display:block;}
+.fact-val{font-size:12px;color:var(--ink);line-height:1.4;}
+
+/* ── DO CARDS ────────────────────────── */
+.do-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--div);border:1px solid var(--div);
+}
+.do-card{
+  background:#fff;padding:26px 22px;
+  position:relative;transition:background .25s;overflow:hidden;
+}
+.do-card:hover{background:var(--lav4);}
+.do-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--lav),var(--sage));
+  opacity:0;transition:opacity .25s;
+}
+.do-card:hover::after{opacity:1;}
+.do-chip{
+  font-size:8px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--acc);background:var(--lav3);border:1px solid var(--lav2);
+  padding:2px 9px;display:inline-block;margin-bottom:14px;
+}
+.do-title{
+  font-family:'Fraunces',serif;font-weight:700;
+  font-size:1.05rem;color:var(--ink);margin-bottom:8px;line-height:1.25;
+}
+.do-body{font-size:12px;color:var(--mid);line-height:1.75;}
+
+/* ── LEARNING ────────────────────────── */
+.learn-section{
+  background:var(--acc);padding:72px 56px;
+  position:relative;overflow:hidden;
+}
+.learn-bg{
+  position:absolute;bottom:-20px;left:-10px;
+  font-family:'Fraunces',serif;font-size:16rem;font-weight:700;font-style:italic;
+  color:rgba(255,255,255,.03);pointer-events:none;white-space:nowrap;user-select:none;
+}
+.learn-section .sec-tag{color:var(--lav2);}
+.learn-section .sec-tag::before{background:var(--lav);}
+.learn-section .sec-title{color:var(--lav4);}
+.learn-section .sec-title em{color:var(--lav2);}
+
+.learn-list{max-width:680px;margin-top:40px;}
+.learn-row{
+  display:grid;grid-template-columns:32px 1fr auto;
+  gap:20px;align-items:start;padding:18px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.learn-row:first-child{border-top:1px solid rgba(255,255,255,.07);}
+.learn-n{font-family:'Fraunces',serif;font-weight:700;font-size:11px;color:var(--lav2);letter-spacing:1px;padding-top:3px;}
+.learn-name{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1rem;color:var(--lav4);margin-bottom:3px;}
+.learn-detail{font-size:11px;color:rgba(216,208,238,.4);margin-bottom:8px;}
+.prog-track{height:2px;background:rgba(255,255,255,.1);overflow:hidden;}
+.prog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--lav2),var(--sage2));transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+.badge{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border:1px solid;white-space:nowrap;margin-top:2px;}
+.b-on{border-color:var(--lav2);color:var(--lav2);}
+.b-next{border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.3);}
+.b-done{border-color:var(--sage2);color:var(--sage2);}
+
+/* ── NOW ─────────────────────────────── */
+.now-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--div);border:1px solid var(--div);
+}
+.now-cell{background:#fff;padding:26px 28px;transition:background .2s;}
+.now-cell:hover{background:var(--lav4);}
+.now-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--acc);margin-bottom:7px;}
+.now-val{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1rem;color:var(--ink);line-height:1.55;}
+
+/* ── SNAKE GAME ──────────────────────── */
+.game-section{
+  background:var(--lav4);
+  padding:72px 56px;
+  border-top:1px solid var(--div);
+  border-bottom:1px solid var(--div);
+}
+.game-section .inner{max-width:1000px;margin:0 auto;}
+
+.game-wrap{
+  display:grid;grid-template-columns:1fr auto;
+  gap:40px;align-items:start;
+  margin-top:40px;
+}
+.game-info{max-width:300px;}
+.game-desc{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+  font-size:.95rem;line-height:1.8;color:var(--mid);margin-bottom:20px;
+}
+.game-controls{
+  font-size:11px;color:var(--soft);line-height:1.9;
+}
+.game-controls span{color:var(--acc);}
+
+.score-display{
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--acc);margin-bottom:8px;
+}
+.score-num{
+  font-family:'Fraunces',serif;font-weight:700;
+  font-size:2rem;color:var(--acc);line-height:1;
+  margin-bottom:16px;
+}
+
+.game-btn{
+  display:inline-block;
+  background:var(--acc);color:var(--lav3);
+  padding:10px 22px;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  border:none;cursor:pointer;font-family:'DM Mono',monospace;font-weight:300;
+  transition:background .2s;margin-bottom:6px;width:100%;text-align:center;
+}
+.game-btn:hover{background:var(--mid);}
+
+.game-status{
+  font-size:10px;color:var(--soft);letter-spacing:1px;
+  text-transform:uppercase;margin-top:8px;min-height:16px;
+}
+
+/* canvas */
+#snakeCanvas{
+  border:1.5px solid var(--div);
+  background:var(--lav4);
+  display:block;
+  image-rendering:pixelated;
+}
+
+/* mobile d-pad */
+.dpad{
+  display:none;
+  grid-template-areas:". up ." "left . right" ". down .";
+  grid-template-columns:40px 40px 40px;
+  grid-template-rows:40px 40px 40px;
+  gap:4px;margin-top:16px;
+}
+.dpad-btn{
+  background:var(--lav3);border:1px solid var(--lav2);
+  color:var(--acc);font-size:14px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;border-radius:4px;
+  -webkit-tap-highlight-color:transparent;user-select:none;
+}
+
+/* ── CTA ─────────────────────────────── */
+.cta-section{
+  background:var(--lav2);padding:72px 56px;text-align:center;
+  position:relative;overflow:hidden;border-top:1px solid var(--div);
+}
+.cta-section::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.5) 1px,transparent 1px);
+  background-size:20px 20px;opacity:.35;pointer-events:none;
+}
+.cta-h{
+  font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,3rem);
+  font-weight:700;font-style:italic;color:var(--ink);
+  margin-bottom:10px;letter-spacing:-.02em;position:relative;
+}
+.cta-sub{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+  font-size:1rem;color:var(--mid);margin-bottom:32px;position:relative;
+}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--acc);color:var(--lav3);
+  padding:14px 34px;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  text-decoration:none;cursor:none;transition:background .25s;position:relative;
+}
+.cta-btn:hover{background:var(--acc-g);}
+
+/* ── FOOTER ──────────────────────────── */
+footer{
+  background:var(--ink);padding:28px 56px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(192,180,220,.3);
+}
+footer a{color:var(--lav2);text-decoration:none;}
+footer a:hover{color:var(--lav);}
+
+/* ── REVEAL ──────────────────────────── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.on{opacity:1;transform:none;}
+.stagger>*{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease;}
+.stagger.on>*:nth-child(1){opacity:1;transform:none;transition-delay:.05s;}
+.stagger.on>*:nth-child(2){opacity:1;transform:none;transition-delay:.14s;}
+.stagger.on>*:nth-child(3){opacity:1;transform:none;transition-delay:.23s;}
+
+@media(max-width:760px){
+  nav{padding:0 20px;}.nav-links{display:none;}
+  .hero{grid-template-columns:1fr;padding:48px 20px;min-height:auto;}
+  .hero-right{display:none;}
+  .section{padding:48px 20px;}
+  hr.rule{margin:0 20px;}
+  .about-grid,.now-grid{grid-template-columns:1fr;}
+  .about-left,.about-right{padding:32px 20px;}
+  .do-cards{grid-template-columns:1fr;}
+  .learn-section,.game-section,.cta-section{padding:48px 20px;}
+  .game-wrap{grid-template-columns:1fr;}
+  .game-info{max-width:100%;}
+  .dpad{display:grid;}
+  footer{flex-direction:column;gap:10px;padding:20px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- translations -->
+<script>
+const T = {
+  en: {
+    strip: ["cms ✦","content migrations ✦","learning figma ✦","digital ops ✦","perpetually curious ✦","open to chat ✦","making things work ✦"],
+    kicker: "hi, welcome — you found me",
+    h1a: "I'm", h1b: "Your Name",
+    desc: "I work in <strong>digital</strong> — wrangling CMS platforms, running content migrations, and making messy information make sense. Currently learning Figma and <strong>slowly becoming a data person.</strong>",
+    btn1: "Say hello", btn2: "Learn more ↓",
+    card_title: "Quick look",
+    card: [["Based","Your City"],["Works in","Digital / Content Ops"],["Specialty","CMS & Migrations"],["Learning","Figma ✦"],["Vibe","organised chaos"],["Currently","open to chat 🌿"]],
+    band: ["Content","Migrations","CMS","Figma","Digital Ops","Always Learning"],
+    about_tag:"About me", about_title:"A little bit", about_title_em:"about me",
+    about1:"Hi! I'm someone who ended up in digital kind of by accident — and then <strong>never left.</strong> Most of my working life lives inside CMS platforms, structuring content and running migrations.",
+    about2:"Lately I've been getting properly into Figma, because apparently once you enjoy making one thing make sense, you want to do it to <strong>everything.</strong>",
+    about3:"Outside of work I'm probably starting a course I didn't plan to, or reorganising something that didn't need it.",
+    facts:[["📍","Based","Your City, somewhere nice"],["💼","Day job","Digital / Content Operations"],["🌿","Currently learning","Figma — and actually loving it"],["🧠","Nerd about","Content structure, information architecture"],["🌸","Fun fact","Something interesting about you here"],["☕","Powered by","Something warm with milk"]],
+    do_tag:"What I do", do_title:"The stuff I actually", do_title_em:"do",
+    do_cards:[
+      ["Day-to-day","CMS & Content Operations","Living inside content management systems — building templates, maintaining structure, keeping things consistent. I've worked in [your CMS platforms here]."],
+      ["Projects","Migrations & Audits","Moving content from one place to another without losing the plot. Auditing what exists, mapping it to a new structure."],
+      ["Growing into","Design & Data","Getting into Figma properly and building data literacy. Content doesn't exist in a vacuum — how it looks and performs matters."]
+    ],
+    learn_tag:"Currently", learn_title:"What I'm", learn_title_em:"learning",
+    learns:[
+      ["Figma — UI Design & Prototyping","Components, auto layout, making things look good","50","In progress","b-on"],
+      ["Course / Cert Name Here","Platform · subject · what you're studying","65","In progress","b-on"],
+      ["Something on the horizon","Maybe SQL, maybe something else — TBD","0","Up next","b-next"],
+      ["Something you've finished","A course or cert completed — it counts!","100","Done ✓","b-done"]
+    ],
+    now_tag:"Right now", now_title:"What's going on", now_title_em:"at the moment",
+    nows:[
+      ["Working on","Something at work — describe what's on your brain"],
+      ["Learning","Figma, and resisting the urge to redesign everything"],
+      ["Reading / watching","Whatever you're into lately — show, book, rabbit hole"],
+      ["Obsessing over","Making this website and CV match perfectly 🌿"]
+    ],
+    game_tag:"Mini game", game_title:"I like", game_title_em:"games too",
+    game_desc:"A little pastel snake lives here. Use arrow keys or WASD to move, eat the ✦ to grow. Consider it a tiny glimpse into why I enjoy things that require patience and problem-solving.",
+    game_controls:"Arrow keys or WASD to move",
+    score_label:"Score",
+    btn_start:"Start game",
+    btn_restart:"Play again",
+    game_over:"Game over!",
+    game_ready:"Press start to play",
+    cta_tag:"Get in touch", cta_title:"Want to say hello?",
+    cta_sub:"Always happy to chat — about work, digital stuff, or anything else.",
+    cta_btn:"you@email.com",
+    footer_left:"Your Name ✦ your little corner",
+    footer_right:"made with ✦ and too many tabs open"
+  },
+  pl: {
+    strip: ["zarządzanie treścią ✦","migracje treści ✦","uczę się figmy ✦","cyfrowe operacje ✦","wiecznie ciekawa ✦","chętnie pogadam ✦","robię rzeczy ✦"],
+    kicker: "cześć, witaj — znalazłaś/eś mnie",
+    h1a: "Jestem", h1b: "Twoje Imię",
+    desc: "Pracuję w <strong>digital</strong> — zarządzam platformami CMS, prowadzę migracje treści i sprawiam, że chaotyczne informacje nabierają sensu. Obecnie uczę się Figmy i <strong>powoli staję się osobą od danych.</strong>",
+    btn1: "Napisz do mnie", btn2: "Dowiedz się więcej ↓",
+    card_title: "W skrócie",
+    card: [["Miasto","Twoje Miasto"],["Pracuję w","Digital / Content Ops"],["Specjalność","CMS i migracje"],["Uczę się","Figmy ✦"],["Vibe","zorganizowany chaos"],["Aktualnie","otwarta na rozmowy 🌿"]],
+    band: ["Treść","Migracje","CMS","Figma","Digital Ops","Ciągłe uczenie"],
+    about_tag:"O mnie", about_title:"Trochę", about_title_em:"o mnie",
+    about1:"Cześć! Trafiłam do digital trochę przypadkowo — i <strong>nigdy nie odeszłam.</strong> Większość mojej pracy to platformy CMS, strukturyzowanie treści i migracje, które (mam nadzieję) nie psują niczego.",
+    about2:"Ostatnio porządnie zabieram się za Figmę, bo najwyraźniej jak już zaczniesz lubić porządkować jedną rzecz, chcesz to robić <strong>ze wszystkim.</strong>",
+    about3:"Poza pracą pewnie zaczynam kurs, którego nie planowałam, albo reorganizuję coś, co wcale nie potrzebowało reorganizacji.",
+    facts:[["📍","Miasto","Twoje Miasto, gdzieś fajnego"],["💼","Praca","Digital / Content Operations"],["🌿","Uczę się","Figmy — i naprawdę mi się podoba"],["🧠","Lubię zgłębiać","Architekturę informacji i struktury treści"],["🌸","Ciekawostka","Coś ciekawego o Tobie tutaj"],["☕","Napędzana","Czymś ciepłym z mlekiem"]],
+    do_tag:"Co robię", do_title:"Rzeczy, które", do_title_em:"naprawdę robię",
+    do_cards:[
+      ["Na co dzień","CMS i operacje na treści","Mieszkam w systemach zarządzania treścią — buduję szablony, utrzymuję strukturę. Pracowałam w [Twoje platformy CMS]."],
+      ["Projekty","Migracje i audyty","Przenoszenie treści z miejsca A do B bez gubienia wątku. Audytowanie tego, co istnieje, mapowanie na nową strukturę."],
+      ["Rozwijam się w","Design i dane","Porządnie wchodzę w Figmę i buduję kompetencje w zakresie danych. Treść nie istnieje w próżni."]
+    ],
+    learn_tag:"Aktualnie", learn_title:"Czego się", learn_title_em:"uczę",
+    learns:[
+      ["Figma — projektowanie UI","Komponenty, auto layout, robienie ładnych rzeczy","50","W trakcie","b-on"],
+      ["Nazwa kursu / certyfikatu","Platforma · temat · co studiujesz","65","W trakcie","b-on"],
+      ["Coś na horyzoncie","Może SQL, może coś innego — TBD","0","Następne","b-next"],
+      ["Coś co już skończyłaś","Kurs lub certyfikat — warto to wpisać!","100","Ukończone ✓","b-done"]
+    ],
+    now_tag:"Teraz", now_title:"Co się dzieje", now_title_em:"w tej chwili",
+    nows:[
+      ["Pracuję nad","Coś w pracy — opisz co zajmuje Twój mózg"],
+      ["Uczę się","Figmy i powstrzymuję się od redesignowania wszystkiego"],
+      ["Czytam / oglądam","Cokolwiek aktualnie Cię wciąga"],
+      ["Obsesja","Sprawienie żeby strona i CV idealnie do siebie pasowały 🌿"]
+    ],
+    game_tag:"Mini gra", game_title:"Lubię też", game_title_em:"gry",
+    game_desc:"Mieszka tu mały pastelowy wąż. Użyj klawiszy strzałek lub WASD, żeby się poruszać, zjedz ✦ żeby rosnąć. Mały wgląd w to, dlaczego lubię rzeczy wymagające cierpliwości.",
+    game_controls:"Strzałki lub WASD do poruszania",
+    score_label:"Wynik",
+    btn_start:"Rozpocznij grę",
+    btn_restart:"Zagraj ponownie",
+    game_over:"Koniec gry!",
+    game_ready:"Naciśnij start",
+    cta_tag:"Napisz do mnie", cta_title:"Chcesz się przywitać?",
+    cta_sub:"Zawsze chętnie pogadam — o pracy, digital albo o czymkolwiek innym.",
+    cta_btn:"you@email.com",
+    footer_left:"Twoje Imię ✦ mój mały zakątek internetu",
+    footer_right:"zrobione z ✦ i zbyt wieloma zakładkami"
+  }
+};
+let lang = 'en';
+
+function t(key){ return T[lang][key]; }
+
+function setLang(l){
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===l));
+  renderAll();
+}
+
+function renderAll(){
+  // strip
+  const stripInner = document.querySelector('.strip-inner');
+  const words = t('strip');
+  const doubled = [...words,...words];
+  stripInner.innerHTML = doubled.map(w=>`<span class="strip-bit">${w}</span>`).join('');
+
+  // nav
+  document.querySelector('.nav-links').innerHTML = `
+    <a href="#about" data-i="nav_about">${lang==='en'?'About':'O mnie'}</a>
+    <a href="#do" data-i="nav_do">${lang==='en'?'What I do':'Co robię'}</a>
+    <a href="#learning" data-i="nav_learn">${lang==='en'?'Learning':'Uczę się'}</a>
+    <a href="#now" data-i="nav_now">${lang==='en'?'Now':'Teraz'}</a>
+    <a href="mailto:you@email.com">${lang==='en'?'Email me':'Napisz'}</a>
+  `;
+  document.querySelectorAll('.nav-links a').forEach(a=>{a.style.cursor='none';});
+
+  // hero
+  document.querySelector('.hero-kicker-text').textContent = t('kicker');
+  document.querySelector('.hero-h-a').textContent = t('h1a');
+  document.querySelector('.hero-h-b').innerHTML = t('h1b');
+  document.querySelector('.hero-desc').innerHTML = t('desc');
+  document.querySelector('.btn-primary span').textContent = t('btn1');
+  document.querySelector('.btn-ghost').textContent = t('btn2');
+
+  // card
+  document.querySelector('.card-top-label').textContent = t('card_title');
+  const rows = document.querySelectorAll('.card-row');
+  t('card').forEach((pair,i)=>{
+    if(rows[i]){
+      rows[i].querySelector('.card-k').textContent = pair[0];
+      rows[i].querySelector('.card-v').textContent = pair[1];
+    }
+  });
+
+  // band
+  const band = t('band');
+  const b2 = [...band,...band];
+  document.querySelector('.band-inner').innerHTML = b2.map(w=>`<span class="band-word">${w} <span class="band-sep">✦</span></span>`).join('');
+
+  // about
+  document.querySelector('.about-sec-tag').textContent = t('about_tag');
+  document.querySelector('.about-sec-title').innerHTML = `${t('about_title')} <em>${t('about_title_em')}</em>`;
+  document.querySelector('.about-p1').innerHTML = t('about1');
+  document.querySelector('.about-p2').innerHTML = t('about2');
+  document.querySelector('.about-p3').innerHTML = t('about3');
+  const factItems = document.querySelectorAll('.fact-item');
+  t('facts').forEach((f,i)=>{
+    if(factItems[i]){
+      factItems[i].querySelector('.fact-ico').textContent = f[0];
+      factItems[i].querySelector('.fact-label').textContent = f[1];
+      factItems[i].querySelector('.fact-val').textContent = f[2];
+    }
+  });
+
+  // do
+  document.querySelector('.do-sec-tag').textContent = t('do_tag');
+  document.querySelector('.do-sec-title').innerHTML = `${t('do_title')} <em>${t('do_title_em')}</em>`;
+  const doCards = document.querySelectorAll('.do-card');
+  t('do_cards').forEach((c,i)=>{
+    if(doCards[i]){
+      doCards[i].querySelector('.do-chip').textContent = c[0];
+      doCards[i].querySelector('.do-title').textContent = c[1];
+      doCards[i].querySelector('.do-body').textContent = c[2];
+    }
+  });
+
+  // learn
+  document.querySelector('.learn-sec-tag').textContent = t('learn_tag');
+  document.querySelector('.learn-sec-title').innerHTML = `${t('learn_title')} <em>${t('learn_title_em')}</em>`;
+  const learnRows = document.querySelectorAll('.learn-row');
+  t('learns').forEach((l,i)=>{
+    if(learnRows[i]){
+      learnRows[i].querySelector('.learn-name').textContent = l[0];
+      learnRows[i].querySelector('.learn-detail').textContent = l[1];
+      learnRows[i].querySelector('.badge').textContent = l[3];
+      learnRows[i].querySelector('.badge').className = 'badge '+l[4];
+    }
+  });
+
+  // now
+  document.querySelector('.now-sec-tag').textContent = t('now_tag');
+  document.querySelector('.now-sec-title').innerHTML = `${t('now_title')} <em>${t('now_title_em')}</em>`;
+  const nowCells = document.querySelectorAll('.now-cell');
+  t('nows').forEach((n,i)=>{
+    if(nowCells[i]){
+      nowCells[i].querySelector('.now-label').textContent = n[0];
+      nowCells[i].querySelector('.now-val').textContent = n[1];
+    }
+  });
+
+  // game
+  document.querySelector('.game-sec-tag').textContent = t('game_tag');
+  document.querySelector('.game-sec-title').innerHTML = `${t('game_title')} <em>${t('game_title_em')}</em>`;
+  document.querySelector('.game-desc').textContent = t('game_desc');
+  document.querySelector('.game-controls-text').textContent = t('game_controls');
+  document.querySelector('.score-label').textContent = t('score_label');
+  document.querySelector('#startBtn').textContent = gameRunning ? t('btn_restart') : t('btn_start');
+  document.querySelector('.game-status').textContent = gameOver ? t('game_over') : (gameRunning ? '' : t('game_ready'));
+
+  // cta
+  document.querySelector('.cta-sec-tag').textContent = t('cta_tag');
+  document.querySelector('.cta-h').textContent = t('cta_title');
+  document.querySelector('.cta-sub').textContent = t('cta_sub');
+  document.querySelector('.cta-btn span').textContent = t('cta_btn');
+
+  // footer
+  document.querySelector('.footer-left').textContent = t('footer_left');
+  document.querySelector('.footer-right').textContent = t('footer_right');
+}
+</script>
+
+<!-- TOP STRIP -->
+<div class="top-strip"><div class="strip-inner"></div></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Your Name</div>
+  <div class="nav-right">
+    <div class="nav-links"></div>
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="pl" onclick="setLang('pl')">PL</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob"></div>
+  <div class="deco-ring" style="width:160px;height:160px;bottom:80px;left:42%;animation-duration:22s;"></div>
+  <div class="deco-ring" style="width:60px;height:60px;top:20%;left:36%;animation-duration:14s;animation-direction:reverse;"></div>
+
+  <div class="hero-left">
+    <div class="hero-kicker">
+      <div class="kicker-dot"></div>
+      <span class="hero-kicker-text"></span>
+    </div>
+    <h1 class="hero-h">
+      <span class="hero-h-a"></span><br>
+      <em class="hero-h-b"></em><br>
+      <span class="ghost">✦</span>
+    </h1>
+    <p class="hero-desc"></p>
+    <div class="hero-btns">
+      <a href="mailto:you@email.com" class="btn-primary">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        <span></span>
+      </a>
+      <a href="#about" class="btn-ghost"></a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="card-top"><span class="card-top-label"></span><div class="card-dot"></div></div>
+      <div class="card-row"><span class="card-k"></span><span class="card-v"></span></div>
+      <div class="card-row"><span class="card-k"></span><span class="card-v"></span></div>
+      <div class="card-row"><span class="card-k"></span><span class="card-v"></span></div>
+      <div class="card-row"><span class="card-k"></span><span class="card-v hi"></span></div>
+      <div class="card-row"><span class="card-k"></span><span class="card-v"></span></div>
+      <div class="card-row"><span class="card-k"></span><span class="card-v hi"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- BAND -->
+<div class="band"><div class="band-inner"></div></div>
+
+<!-- ABOUT -->
+<section class="section reveal" id="about" style="padding-bottom:0;">
+  <div class="sec-tag about-sec-tag"></div>
+  <h2 class="sec-title about-sec-title"></h2>
+</section>
+<div class="about-grid reveal" style="margin:0 56px 72px;">
+  <div class="about-left">
+    <div class="about-body">
+      <p class="about-p1"></p>
+      <p class="about-p2"></p>
+      <p class="about-p3"></p>
+    </div>
+  </div>
+  <div class="about-right">
+    <ul class="fact-list">
+      <li class="fact-item"><span class="fact-ico"></span><div><span class="fact-label"></span><span class="fact-val"></span></div></li>
+      <li class="fact-item"><span class="fact-ico"></span><div><span class="fact-label"></span><span class="fact-val"></span></div></li>
+      <li class="fact-item"><span class="fact-ico"></span><div><span class="fact-label"></span><span class="fact-val"></span></div></li>
+      <li class="fact-item"><span class="fact-ico"></span><div><span class="fact-label"></span><span class="fact-val"></span></div></li>
+      <li class="fact-item"><span class="fact-ico"></span><div><span class="fact-label"></span><span class="fact-val"></span></div></li>
+      <li class="fact-item"><span class="fact-ico"></span><div><span class="fact-label"></span><span class="fact-val"></span></div></li>
+    </ul>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- DO -->
+<section class="section" id="do">
+  <div class="sec-tag do-sec-tag reveal"></div>
+  <h2 class="sec-title do-sec-title reveal"></h2>
+  <div class="do-cards stagger">
+    <div class="do-card"><div class="do-chip"></div><div class="do-title"></div><p class="do-body"></p></div>
+    <div class="do-card"><div class="do-chip"></div><div class="do-title"></div><p class="do-body"></p></div>
+    <div class="do-card"><div class="do-chip"></div><div class="do-title"></div><p class="do-body"></p></div>
+  </div>
+</section>
+
+<!-- LEARNING -->
+<div class="learn-section reveal" id="learning">
+  <div class="learn-bg">learning</div>
+  <div style="max-width:1000px;margin:0 auto;position:relative;z-index:1;">
+    <div class="sec-tag learn-sec-tag"></div>
+    <h2 class="sec-title learn-sec-title"></h2>
+    <div class="learn-list">
+      <div class="learn-row"><div class="learn-n">01</div><div><div class="learn-name"></div><div class="learn-detail"></div><div class="prog-track"><div class="prog-fill" data-w="50"></div></div></div><div class="badge b-on"></div></div>
+      <div class="learn-row"><div class="learn-n">02</div><div><div class="learn-name"></div><div class="learn-detail"></div><div class="prog-track"><div class="prog-fill" data-w="65"></div></div></div><div class="badge b-on"></div></div>
+      <div class="learn-row"><div class="learn-n">03</div><div><div class="learn-name"></div><div class="learn-detail"></div><div class="prog-track"><div class="prog-fill" data-w="0"></div></div></div><div class="badge b-next"></div></div>
+      <div class="learn-row"><div class="learn-n">04</div><div><div class="learn-name"></div><div class="learn-detail"></div><div class="prog-track"><div class="prog-fill" data-w="100"></div></div></div><div class="badge b-done"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- NOW -->
+<section class="section reveal" id="now">
+  <div class="sec-tag now-sec-tag"></div>
+  <h2 class="sec-title now-sec-title"></h2>
+  <div class="now-grid">
+    <div class="now-cell"><div class="now-label"></div><div class="now-val"></div></div>
+    <div class="now-cell"><div class="now-label"></div><div class="now-val"></div></div>
+    <div class="now-cell"><div class="now-label"></div><div class="now-val"></div></div>
+    <div class="now-cell"><div class="now-label"></div><div class="now-val"></div></div>
+  </div>
+</section>
+
+<!-- SNAKE GAME -->
+<section class="game-section reveal" id="game">
+  <div class="inner">
+    <div class="sec-tag game-sec-tag"></div>
+    <h2 class="sec-title game-sec-title"></h2>
+    <div class="game-wrap">
+      <div class="game-info">
+        <p class="game-desc"></p>
+        <div class="score-display score-label"></div>
+        <div class="score-num" id="scoreDisplay">0</div>
+        <button class="game-btn" id="startBtn" onclick="startGame()"></button>
+        <div class="game-status"></div>
+        <div style="margin-top:16px;font-size:11px;color:var(--soft);" class="game-controls-text"></div>
+        <div class="dpad" id="dpad">
+          <div class="dpad-btn" style="grid-area:up" ontouchstart="dpadDir('UP')">↑</div>
+          <div class="dpad-btn" style="grid-area:left" ontouchstart="dpadDir('LEFT')">←</div>
+          <div class="dpad-btn" style="grid-area:right" ontouchstart="dpadDir('RIGHT')">→</div>
+          <div class="dpad-btn" style="grid-area:down" ontouchstart="dpadDir('DOWN')">↓</div>
+        </div>
+      </div>
+      <canvas id="snakeCanvas" width="280" height="280"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section reveal">
+  <div class="sec-tag cta-sec-tag" style="justify-content:center;"></div>
+  <h2 class="cta-h"></h2>
+  <p class="cta-sub"></p>
+  <a href="mailto:you@email.com" class="cta-btn">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+    <span></span>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-left"></span>
+  <span class="footer-right"></span>
+</footer>
+
+<script>
+// ── CURSOR
+const cur=document.getElementById('cur');
+const ring=document.getElementById('cur-ring');
+let mx=-100,my=-100,rx=-100,ry=-100;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+});
+(function loop(){
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button,.do-card,.now-cell,.learn-row').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+});
+
+// ── SCROLL REVEAL
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.classList.add('on');
+    e.target.querySelectorAll('.prog-fill').forEach(b=>{
+      setTimeout(()=>{b.style.width=b.dataset.w+'%';},120);
+    });
+    io.unobserve(e.target);
+  });
+},{threshold:.07});
+document.querySelectorAll('.reveal,.stagger').forEach(el=>io.observe(el));
+
+// ── HERO PARALLAX
+const heroH=document.querySelector('.hero-h');
+window.addEventListener('scroll',()=>{
+  if(!heroH)return;
+  heroH.style.transform=`translateY(${window.scrollY*.1}px)`;
+},{passive:true});
+
+// ── SNAKE GAME
+const canvas=document.getElementById('snakeCanvas');
+const ctx=canvas.getContext('2d');
+const CELL=14, COLS=20, ROWS=20;
+canvas.width=CELL*COLS; canvas.height=CELL*ROWS;
+
+const COLORS={
+  bg:'#F6F3FC',
+  grid:'rgba(192,180,220,.12)',
+  head:'#7060A0',
+  body:['#C0B4DC','#D8D0EE','#B4C4AC','#E4BED0'],
+  food:'#5A4878',
+  text:'#5A4878'
+};
+
+let snake,dir,nextDir,food,score,gameRunning=false,gameOver=false,gameLoop;
+
+function initGame(){
+  snake=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];
+  dir={x:1,y:0}; nextDir={x:1,y:0};
+  score=0; gameOver=false;
+  placeFood();
+  document.getElementById('scoreDisplay').textContent='0';
+  document.querySelector('.game-status').textContent='';
+}
+
+function placeFood(){
+  let pos;
+  do{pos={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)};}
+  while(snake.some(s=>s.x===pos.x&&s.y===pos.y));
+  food=pos;
+}
+
+function drawGame(){
+  // bg
+  ctx.fillStyle=COLORS.bg;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  // grid
+  ctx.strokeStyle=COLORS.grid;
+  ctx.lineWidth=.5;
+  for(let x=0;x<=COLS;x++){ctx.beginPath();ctx.moveTo(x*CELL,0);ctx.lineTo(x*CELL,canvas.height);ctx.stroke();}
+  for(let y=0;y<=ROWS;y++){ctx.beginPath();ctx.moveTo(0,y*CELL);ctx.lineTo(canvas.width,y*CELL);ctx.stroke();}
+
+  // food — draw ✦
+  ctx.fillStyle=COLORS.food;
+  ctx.font=`bold ${CELL+2}px serif`;
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('✦',food.x*CELL+CELL/2,food.y*CELL+CELL/2+1);
+
+  // snake
+  snake.forEach((seg,i)=>{
+    if(i===0){
+      ctx.fillStyle=COLORS.head;
+    } else {
+      ctx.fillStyle=COLORS.body[i%COLORS.body.length];
+    }
+    const pad=i===0?1:2;
+    ctx.beginPath();
+    ctx.roundRect(seg.x*CELL+pad,seg.y*CELL+pad,CELL-pad*2,CELL-pad*2,3);
+    ctx.fill();
+  });
+}
+
+function step(){
+  dir=nextDir;
+  const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+
+  // wall collision
+  if(head.x<0||head.x>=COLS||head.y<0||head.y>=ROWS){endGame();return;}
+  // self collision
+  if(snake.some(s=>s.x===head.x&&s.y===head.y)){endGame();return;}
+
+  snake.unshift(head);
+
+  if(head.x===food.x&&head.y===food.y){
+    score++;
+    document.getElementById('scoreDisplay').textContent=score;
+    placeFood();
+  } else {
+    snake.pop();
+  }
+  drawGame();
+}
+
+function startGame(){
+  if(gameLoop)clearInterval(gameLoop);
+  initGame();
+  gameRunning=true;
+  drawGame();
+  gameLoop=setInterval(step,130);
+  document.getElementById('startBtn').textContent=t('btn_restart');
+  document.querySelector('.game-status').textContent='';
+}
+
+function endGame(){
+  clearInterval(gameLoop);
+  gameRunning=false; gameOver=true;
+
+  // game over overlay
+  ctx.fillStyle='rgba(90,72,120,.7)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='#F6F3FC';
+  ctx.font=`bold 16px 'DM Mono',monospace`;
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(t('game_over'),canvas.width/2,canvas.height/2-12);
+  ctx.font=`12px 'DM Mono',monospace`;
+  ctx.fillText(`${t('score_label')}: ${score}`,canvas.width/2,canvas.height/2+14);
+
+  document.querySelector('.game-status').textContent=t('game_over');
+  document.getElementById('startBtn').textContent=t('btn_restart');
+}
+
+// draw idle screen
+function drawIdle(){
+  ctx.fillStyle=COLORS.bg;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.strokeStyle=COLORS.grid;ctx.lineWidth=.5;
+  for(let x=0;x<=COLS;x++){ctx.beginPath();ctx.moveTo(x*CELL,0);ctx.lineTo(x*CELL,canvas.height);ctx.stroke();}
+  for(let y=0;y<=ROWS;y++){ctx.beginPath();ctx.moveTo(0,y*CELL);ctx.lineTo(canvas.width,y*CELL);ctx.stroke();}
+  ctx.fillStyle=COLORS.text;
+  ctx.font=`bold 14px 'DM Mono',monospace`;
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('✦',canvas.width/2,canvas.height/2);
+}
+
+// controls
+document.addEventListener('keydown',e=>{
+  if(!gameRunning)return;
+  const map={'ArrowUp':{x:0,y:-1},'ArrowDown':{x:0,y:1},'ArrowLeft':{x:-1,y:0},'ArrowRight':{x:1,y:0},
+    'w':{x:0,y:-1},'s':{x:0,y:1},'a':{x:-1,y:0},'d':{x:1,y:0},
+    'W':{x:0,y:-1},'S':{x:0,y:1},'A':{x:-1,y:0},'D':{x:1,y:0}};
+  const nd=map[e.key];
+  if(nd&&!(nd.x===-dir.x&&nd.y===-dir.y)){nextDir=nd;}
+  if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key))e.preventDefault();
+});
+
+function dpadDir(d){
+  if(!gameRunning)return;
+  const map={UP:{x:0,y:-1},DOWN:{x:0,y:1},LEFT:{x:-1,y:0},RIGHT:{x:1,y:0}};
+  const nd=map[d];
+  if(nd&&!(nd.x===-dir.x&&nd.y===-dir.y))nextDir=nd;
+}
+
+// ── INIT
+renderAll();
+drawIdle();
+document.querySelector('.game-status').textContent=T.en.game_ready;
+</script>
+</body>
+</html>
