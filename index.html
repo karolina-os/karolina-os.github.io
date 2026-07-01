@@ -1,709 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Karolina ✦ welcome!</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Karolina Oszust</title>
+
+<!-- ============================================================ -->
+<!--  EDIT ME: everything you need to change lives in two places:  -->
+<!--  1) the [square brackets] in the text below                   -->
+<!--  2) the CONFIG block near the bottom of this file             -->
+<!-- ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;900&family=Space+Mono&display=swap" rel="stylesheet">
+
 <style>
-:root{
-  --bg:    #FDF8F8;
-  --lav:   #D4A8B8;
-  --lav2:  #EDD4DC;
-  --lav3:  #FAF0F2;
-  --acc:   #8B2040;
-  --pink:  #C96080;
-  --pink2: #E8B0C0;
-  --pink3: #FDF0F4;
-  --sage:  #C8A0A8;
-  --sage2: #EDD4D8;
-  --yellow:#F4E4E0;
-  --ink:   #1A0810;
-  --mid:   #604050;
-  --soft:  #A07080;
-}
+  :root{
+    --paper:#F2F2EF;
+    --ink:#1C1C1F;
+    --muted:#8B8B87;
+    --accent:#9E4A52;   /* dusty rose — same accent as the CV */
+    --rule:rgba(28,28,31,.13);
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Schibsted Grotesk",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  .wrap{
+    max-width:640px;
+    margin:0 auto;
+    padding:clamp(4rem,12vh,9rem) clamp(1.4rem,6vw,2rem) clamp(3rem,8vh,6rem);
+  }
 
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;overflow:hidden;}
+  /* ---------- section rhythm + labels ---------- */
+  section{margin-top:clamp(3.6rem,9vh,6.5rem);}
+  .label{
+    font-family:"Space Mono",monospace;
+    font-size:.74rem;letter-spacing:.16em;text-transform:lowercase;
+    color:var(--muted);margin:0 0 1.4rem;
+  }
+  .label::before{content:"·  ";color:var(--accent);}
 
-body{
-  background:var(--bg);
-  font-family:'Jost',sans-serif;
-  font-weight:300;
-  font-size:13px;
-  cursor:none;
-  user-select:none;
-}
+  /* ---------- hero ---------- */
+  .name{
+    font-weight:700;
+    font-size:clamp(2.7rem,9vw,5rem);
+    letter-spacing:-.035em;line-height:.98;
+    text-transform:lowercase;
+    margin:0;
+    opacity:0;transform:translateY(10px);
+    animation:rise .9s cubic-bezier(.2,.7,.2,1) .1s forwards;
+  }
+  .lede{
+    font-size:clamp(1.05rem,2.6vw,1.28rem);
+    color:var(--ink);max-width:34ch;
+    margin:1.1rem 0 0;
+    opacity:0;transform:translateY(10px);
+    animation:rise .9s cubic-bezier(.2,.7,.2,1) .24s forwards;
+  }
+  @keyframes rise{to{opacity:1;transform:none;}}
 
-/* ── CURSOR ── */
-#cur{
-  position:fixed;pointer-events:none;z-index:9999;
-  font-size:16px;line-height:1;
-  transform:translate(-50%,-60%);
-  transition:transform .1s;
-  filter:drop-shadow(0 2px 4px rgba(139,32,64,.3));
-}
+  /* ---------- the stage: a little level you can play ---------- */
+  .stage{
+    position:relative;
+    height:120px;
+    margin-top:clamp(1.8rem,5vh,3rem);
+    touch-action:none;
+  }
+  .ground{
+    position:absolute;left:0;right:0;bottom:34px;
+    height:1px;background:var(--rule);
+  }
+  .player{
+    position:absolute;bottom:34px;left:2px;
+    width:30px;height:34px;
+    padding:0;border:none;background:none;cursor:grab;
+    transition:left .09s linear;
+  }
+  .player:active{cursor:grabbing;}
+  .player__body{
+    position:absolute;inset:0;
+    background:var(--accent);
+    border-radius:9px 9px 7px 7px;
+    animation:bob 2.4s ease-in-out infinite;
+    transform-origin:bottom center;
+  }
+  .player__body::before,
+  .player__body::after{ /* eyes */
+    content:"";position:absolute;top:11px;
+    width:4px;height:4px;border-radius:50%;background:var(--paper);
+  }
+  .player__body::before{left:8px;}
+  .player__body::after{right:8px;}
+  .player.hop .player__body{animation:hop .42s cubic-bezier(.3,.9,.3,1);}
+  @keyframes bob{0%,100%{transform:translateY(0) scaleY(1);}50%{transform:translateY(-2px) scaleY(1.02);}}
+  @keyframes hop{
+    0%{transform:translateY(0) scaleY(.86);}
+    30%{transform:translateY(-34px) scaleY(1.06);}
+    60%{transform:translateY(0) scaleY(.9);}
+    100%{transform:translateY(0) scaleY(1);}
+  }
+  .player:focus-visible{outline:none;}
+  .player:focus-visible .player__body{box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--accent);}
+  .hint{
+    position:absolute;left:0;bottom:2px;
+    font-family:"Space Mono",monospace;font-size:.7rem;letter-spacing:.06em;
+    color:var(--muted);
+  }
+  .hint b{color:var(--ink);font-weight:400;}
 
-/* ── SCREENS ── */
-.screen{
-  position:fixed;inset:0;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  transition:opacity .5s ease, transform .5s ease;
-  overflow:hidden;
-}
-.screen.hidden{
-  opacity:0;pointer-events:none;transform:scale(.97);
-}
+  /* ---------- prose ---------- */
+  .prose{font-size:1.05rem;max-width:52ch;}
+  .prose p{margin:0 0 1rem;}
+  .prose a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--accent);}
+  .prose a:hover{color:var(--accent);}
 
-/* ── SCREEN: TITLE ── */
-#s-title{background:var(--bg);}
+  /* ---------- work / video ---------- */
+  .frame{
+    position:relative;aspect-ratio:16/9;width:100%;
+    background:#EAEAE6;border:1px solid var(--rule);overflow:hidden;
+  }
+  .frame iframe{width:100%;height:100%;border:0;display:block;}
+  .ph{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;gap:.7rem;
+    align-items:center;justify-content:center;text-align:center;padding:1.4rem;
+  }
+  .ph .play{
+    width:0;height:0;border-left:17px solid var(--accent);
+    border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;
+  }
+  .ph .pt{font-weight:500;}
+  .ph .pn{font-family:"Space Mono",monospace;font-size:.7rem;color:var(--muted);max-width:32ch;}
+  .cap{
+    margin-top:.9rem;font-family:"Space Mono",monospace;
+    font-size:.76rem;letter-spacing:.04em;color:var(--muted);
+  }
+  .cap b{color:var(--ink);font-weight:400;}
 
-.stars-bg{
-  position:absolute;inset:0;pointer-events:none;overflow:hidden;
-}
-.star{
-  position:absolute;
-  animation:twinkle var(--d,3s) ease-in-out infinite alternate;
-  font-size:var(--sz,1rem);
-  opacity:.6;
-}
-@keyframes twinkle{from{opacity:.2;transform:scale(.8);}to{opacity:.9;transform:scale(1.1);}}
+  /* ---------- contact ---------- */
+  .contact a{
+    display:inline-block;color:var(--ink);text-decoration:none;
+    border-bottom:1px solid transparent;transition:border-color .18s;
+  }
+  .contact a:hover,.contact a:focus-visible{border-bottom-color:var(--accent);}
+  .big-mail{font-size:clamp(1.4rem,5vw,2.1rem);font-weight:500;letter-spacing:-.01em;}
+  .social{margin-top:1rem;display:flex;gap:1.4rem;font-size:1rem;}
+  .colophon{
+    margin-top:clamp(3rem,8vh,5rem);
+    font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.06em;
+    color:var(--muted);
+  }
 
-.title-inner{
-  text-align:center;position:relative;z-index:1;
-  display:flex;flex-direction:column;align-items:center;gap:0;
-}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
 
-.title-hi{
-  font-size:11px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--soft);margin-bottom:20px;
-  animation:fadeUp .6s ease .1s both;
-}
-
-.title-name{
-  font-family:'Jost',sans-serif;
-  font-weight:500;font-size:clamp(2.8rem,7vw,5rem);
-  line-height:1;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--acc);
-  animation:fadeUp .7s ease .2s both;
-}
-
-.title-role{
-  font-size:11px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--soft);margin-top:10px;margin-bottom:48px;
-  animation:fadeUp .7s ease .35s both;
-}
-
-/* the door buttons */
-.doors{
-  display:flex;gap:16px;flex-wrap:wrap;justify-content:center;
-  animation:fadeUp .7s ease .5s both;
-}
-
-.door{
-  display:flex;flex-direction:column;align-items:center;gap:10px;
-  cursor:none;
-  transition:transform .25s;
-}
-.door:hover{transform:translateY(-6px);}
-
-.door-icon{
-  width:80px;height:80px;
-  border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:2rem;
-  position:relative;
-  transition:box-shadow .25s;
-}
-.door:hover .door-icon{
-  box-shadow:0 8px 24px rgba(90,58,136,.2);
-}
-
-.door-label{
-  font-size:9px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--soft);
-}
-
-/* door colours */
-.d-about .door-icon{background:var(--lav2);border:1.5px solid var(--lav);}
-.d-work  .door-icon{background:var(--pink3);border:1.5px solid var(--pink2);}
-.d-learn .door-icon{background:var(--sage2);border:1.5px solid var(--sage);}
-.d-now   .door-icon{background:var(--yellow);border:1.5px solid #D8CC80;}
-.d-game  .door-icon{background:var(--lav3);border:1.5px dashed var(--acc);} /* game is special */
-
-/* lang in corner */
-.lang-corner{
-  position:fixed;top:20px;right:24px;
-  display:flex;gap:0;z-index:500;
-}
-.lbtn{
-  font-size:9px;letter-spacing:2px;text-transform:uppercase;
-  padding:5px 10px;background:transparent;border:none;
-  color:var(--soft);cursor:none;font-family:'DM Mono',monospace;
-}
-.lbtn.on{color:var(--acc);}
-.lbtn:first-child{border-right:1px solid var(--lav);}
-
-/* email corner */
-.email-corner{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
-  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--soft);
-  display:flex;align-items:center;gap:8px;
-  animation:fadeUp .7s ease .8s both;
-  cursor:none;
-  transition:color .2s;
-}
-.email-corner:hover{color:var(--acc);}
-.email-corner svg{opacity:.6;}
-a.email-corner{text-decoration:none;}
-
-/* ── SCREEN: PANEL ── */
-.panel-screen{
-  background:var(--bg);
-  padding:0;
-}
-
-.panel-wrap{
-  width:min(680px,92vw);
-  max-height:82vh;
-  overflow-y:auto;
-  scrollbar-width:thin;
-  scrollbar-color:var(--lav) transparent;
-  position:relative;
-  background:var(--bg);
-}
-
-/* back button */
-.back-btn{
-  position:fixed;top:20px;left:24px;
-  display:flex;align-items:center;gap:8px;
-  font-size:9px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--soft);cursor:none;
-  transition:color .2s;
-  z-index:500;
-}
-.back-btn:hover{color:var(--acc);}
-
-/* panel header stripe */
-.panel-stripe{
-  height:5px;width:100%;
-  border-radius:3px 3px 0 0;
-  margin-bottom:0;
-}
-.about-stripe{background:linear-gradient(90deg,var(--lav),var(--acc));}
-.work-stripe{background:linear-gradient(90deg,var(--pink),var(--acc));}
-.learn-stripe{background:linear-gradient(90deg,var(--sage),var(--acc));}
-.now-stripe{background:linear-gradient(90deg,#D8CC80,var(--acc));}
-
-.panel-body{
-  padding:40px 44px 44px;
-  border:1.5px solid var(--lav2);
-  border-top:none;
-  background:var(--bg);
-}
-
-.panel-title{
-  font-family:'Jost',sans-serif;
-  font-weight:500;font-size:1.4rem;
-  color:var(--acc);line-height:1.1;
-  letter-spacing:.08em;text-transform:uppercase;
-  margin-bottom:6px;
-}
-.panel-title em{font-style:italic;font-weight:300;color:var(--pink);}
-.panel-sub{
-  font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--soft);margin-bottom:28px;
-}
-
-/* about content */
-.about-intro{
-  font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;
-  font-size:1.08rem;line-height:1.85;color:var(--mid);
-  margin-bottom:28px;
-}
-.about-intro strong{font-style:normal;color:var(--acc);}
-
-.fact-list{list-style:none;border-top:1px solid var(--lav2);}
-.fact-li{
-  display:grid;grid-template-columns:20px 1fr;gap:10px;
-  padding:11px 0;border-bottom:1px solid var(--lav2);
-  font-size:12px;
-}
-.fact-ico{font-size:.85rem;}
-.fact-k{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--lav);display:block;margin-bottom:1px;}
-.fact-v{color:var(--ink);}
-
-/* work content */
-.work-item{
-  padding:20px 0;border-bottom:1px solid var(--lav2);
-}
-.work-item:first-child{border-top:1px solid var(--lav2);}
-.work-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:2px;}
-.work-role{
-  font-family:'Jost',sans-serif;font-weight:500;
-  font-size:1rem;color:var(--acc);letter-spacing:.04em;text-transform:uppercase;
-}
-.work-date{font-size:9px;color:var(--soft);letter-spacing:.5px;}
-.work-bullets{list-style:none;margin-top:6px;}
-.work-bullets li{
-  font-size:11.5px;color:#4A4060;line-height:1.6;
-  padding:1px 0 1px 10px;position:relative;
-}
-.work-bullets li::before{content:'–';position:absolute;left:0;color:var(--lav);}
-
-/* edu item */
-.edu-item{padding:16px 0;border-bottom:1px solid var(--lav2);}
-.edu-item:first-child{border-top:1px solid var(--lav2);}
-.edu-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:1px;}
-.edu-q{font-family:'Fraunces',serif;font-weight:700;font-size:.95rem;color:var(--acc);}
-.edu-date{font-size:9px;color:var(--soft);}
-.edu-where{font-family:'Fraunces',serif;font-style:italic;font-size:.85rem;color:var(--soft);margin-bottom:3px;}
-.edu-note{font-size:11px;color:#6A5880;}
-
-/* learn content */
-.learn-row{
-  display:grid;grid-template-columns:1fr auto;
-  gap:12px;align-items:center;
-  padding:14px 0;border-bottom:1px solid var(--lav2);
-}
-.learn-row:first-child{border-top:1px solid var(--lav2);}
-.learn-name{font-size:12.5px;color:var(--ink);margin-bottom:2px;}
-.learn-detail{font-size:10px;color:var(--soft);}
-.learn-prog{height:2px;background:var(--lav2);margin-top:6px;overflow:hidden;}
-.learn-fill{height:100%;background:linear-gradient(90deg,var(--lav),var(--acc));width:0%;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
-.lbadge{font-size:7px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid;padding:3px 8px;white-space:nowrap;}
-.lb-on{border-color:var(--acc);color:var(--acc);}
-.lb-done{border-color:var(--lav);color:var(--soft);}
-
-/* skills chips */
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;}
-.chip{
-  font-size:9px;letter-spacing:.5px;
-  border:1px solid var(--lav2);color:#6A5880;
-  padding:4px 10px;background:var(--lav3);
-}
-
-/* now content */
-.now-row{
-  padding:18px 0;border-bottom:1px solid var(--lav2);
-}
-.now-row:first-child{border-top:1px solid var(--lav2);}
-.now-lbl{
-  font-size:9px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--pink);margin-bottom:6px;
-}
-.now-txt{
-  font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;
-  font-size:1rem;color:var(--ink);line-height:1.55;
-}
-
-/* ── SCREEN: GAME ── */
-#s-game{
-  background:#C49098;
-  flex-direction:column;gap:16px;
-}
-.game-title-t{
-  font-family:'Jost',sans-serif;font-weight:500;
-  font-size:1.2rem;color:var(--ink);letter-spacing:.06em;text-transform:uppercase;
-}
-.game-score-wrap{
-  display:flex;align-items:center;gap:16px;
-}
-.g-score-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink);opacity:.6;}
-.g-score{
-  font-family:'Jost',sans-serif;font-weight:500;
-  font-size:2rem;color:var(--ink);line-height:1;
-}
-#snakeCanvas{
-  border:1.5px solid rgba(26,8,16,.15);
-  image-rendering:pixelated;display:block;
-}
-.game-btns{display:flex;gap:10px;}
-.gbtn{
-  background:var(--ink);color:#FDF8F8;
-  border:none;padding:10px 22px;
-  font-family:'Jost',sans-serif;font-weight:400;
-  font-size:9px;letter-spacing:2px;text-transform:uppercase;
-  cursor:none;transition:background .2s;
-}
-.gbtn:hover{background:var(--acc);}
-.g-ctrl{font-size:9px;color:var(--ink);opacity:.5;letter-spacing:1px;}
-.dpad{display:none;grid-template-areas:". up ." "left . right" ". down .";grid-template-columns:40px 40px 40px;grid-template-rows:40px 40px 40px;gap:4px;}
-.dpad-btn{background:rgba(224,216,244,.15);border:1px solid rgba(224,216,244,.2);color:var(--lav2);font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:4px;-webkit-tap-highlight-color:transparent;user-select:none;}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
-@keyframes popIn{from{opacity:0;transform:scale(.92);}to{opacity:1;transform:scale(1);}}
-
-.panel-wrap{animation:popIn .35s ease both;}
-
-/* hover wiggle on door icons */
-@keyframes wiggle{0%,100%{transform:rotate(-3deg);}50%{transform:rotate(3deg);}}
-.door:hover .door-icon{animation:wiggle .4s ease;}
-
-@media(max-width:600px){
-  .doors{gap:12px;}
-  .door-icon{width:64px;height:64px;font-size:1.6rem;}
-  .panel-body{padding:28px 24px 32px;}
-  #snakeCanvas{display:none;}
-  .dpad{display:grid;}
-}
+  @media(prefers-reduced-motion:reduce){
+    .name,.lede{animation:none;opacity:1;transform:none;}
+    .player__body{animation:none;}
+    .player{transition:none;}
+  }
 </style>
 </head>
 <body>
+  <div class="wrap">
 
-<div id="cur">✦</div>
+    <!-- hero -->
+    <header>
+      <h1 class="name">karolina<br>oszust</h1>
+      <p class="lede">i keep websites working and looking good. and i make games.</p>
 
-<!-- LANG SWITCHER -->
-<div class="lang-corner">
-  <button class="lbtn on" data-lang="en" onclick="setLang('en')">EN</button>
-  <button class="lbtn" data-lang="pl" onclick="setLang('pl')">PL</button>
-</div>
-
-<!-- ═══ TITLE SCREEN ═══ -->
-<div class="screen" id="s-title">
-  <div class="stars-bg" id="stars"></div>
-
-  <div class="title-inner">
-    <div class="title-hi" id="t-hi"></div>
-    <div class="title-name">
-      <span id="t-name"></span>
-    </div>
-    <div class="title-role" id="t-role"></div>
-
-    <div class="doors">
-      <div class="door d-about" onclick="openPanel('about')">
-        <div class="door-icon">🌸</div>
-        <div class="door-label" id="d-about"></div>
+      <!-- the one playful bit: a little level you can actually play -->
+      <div class="stage" id="stage">
+        <div class="ground"></div>
+        <button class="player" id="player" aria-label="A little character you can move. Focus it, then use the left and right arrow keys to walk and the up arrow to hop.">
+          <span class="player__body"></span>
+        </button>
+        <p class="hint" id="hint">move me · <b>← →</b> walk · <b>↑</b> hop</p>
       </div>
-      <div class="door d-work" onclick="openPanel('work')">
-        <div class="door-icon">💼</div>
-        <div class="door-label" id="d-work"></div>
-      </div>
-      <div class="door d-learn" onclick="openPanel('learn')">
-        <div class="door-icon">📚</div>
-        <div class="door-label" id="d-learn"></div>
-      </div>
-      <div class="door d-game" onclick="openGame()">
-        <div class="door-icon">🐍</div>
-        <div class="door-label" id="d-game"></div>
-      </div>
-    </div>
-  </div>
+    </header>
 
-  <a href="mailto:karolina.content@outlook.com" class="email-corner">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-    <span id="t-email"></span>
-  </a>
-</div>
+    <!-- about -->
+    <section id="about">
+      <p class="label">about</p>
+      <div class="prose">
+        <p>hi, i'm karolina. i work in content and qa — looking after a large e-commerce website, testing pages, tracking down bugs and broken links, and keeping everything accurate, consistent and easy to use. i like the details that make a site both work properly and feel good to use.</p>
+        <p>but i'm a games development graduate first, and games are what i love making. the video below is my final year project — [one line on what the game is / what you'll see]. i also build small web games for fun.</p>
+      </div>
+    </section>
 
-<!-- ═══ PANEL SCREEN ═══ -->
-<div class="screen hidden" id="s-panel">
-  <button class="back-btn" onclick="goBack()">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="19,12 5,12"/><polyline points="12,5 5,12 12,19"/></svg>
-    <span id="back-label"></span>
-  </button>
-  <div class="panel-wrap" id="panel-wrap"></div>
-</div>
+    <!-- work -->
+    <section id="work">
+      <p class="label">work</p>
+      <div class="frame">
+        <div id="player-video" class="ph">
+          <span class="play" aria-hidden="true"></span>
+          <span class="pt">final-year project — walkthrough</span>
+          <span class="pn">// add your YouTube link in CONFIG (youTubeId) at the bottom of this file</span>
+        </div>
+      </div>
+      <p class="cap"><b>[game title]</b> · unity · <b>[your role]</b> · 2024 — [one line on what it is]</p>
+    </section>
 
-<!-- ═══ GAME SCREEN ═══ -->
-<div class="screen hidden" id="s-game">
-  <button class="back-btn" style="color:var(--ink);opacity:.7;" onclick="goBack()">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="19,12 5,12"/><polyline points="12,5 5,12 12,19"/></svg>
-    <span id="game-back-label"></span>
-  </button>
-  <div class="game-title-t" id="game-title-t"></div>
-  <div class="game-score-wrap">
-    <div class="g-score-lbl" id="g-score-lbl"></div>
-    <div class="g-score" id="scoreDisplay">0</div>
+    <!-- contact -->
+    <section id="contact" class="contact">
+      <p class="label">contact</p>
+      <a class="big-mail" id="mail" href="#">[your email]</a>
+      <div class="social">
+        <a id="gh" href="#">github ↗</a>
+        <a id="li" href="#">linkedin ↗</a>
+      </div>
+      <p class="colophon">© 2025 karolina oszust · wrocław</p>
+    </section>
+
   </div>
-  <canvas id="snakeCanvas"></canvas>
-  <div class="game-btns">
-    <button class="gbtn" id="startBtn" onclick="startGame()"></button>
-  </div>
-  <div class="g-ctrl" id="g-ctrl"></div>
-  <div class="dpad" id="dpad">
-    <div class="dpad-btn" style="grid-area:up" ontouchstart="dpadDir('UP')">↑</div>
-    <div class="dpad-btn" style="grid-area:left" ontouchstart="dpadDir('LEFT')">←</div>
-    <div class="dpad-btn" style="grid-area:right" ontouchstart="dpadDir('RIGHT')">→</div>
-    <div class="dpad-btn" style="grid-area:down" ontouchstart="dpadDir('DOWN')">↓</div>
-  </div>
-</div>
 
 <script>
-/* ── TRANSLATIONS ── */
-const T={
-  en:{
-    hi:"hi, you found me ✦",
-    name:"Karolina Oszust",
-    role:"Content & CMS Specialist · Wrocław",
-    email:"karolina.content@outlook.com",
-    d_about:"About me", d_work:"My work", d_learn:"Learning", d_game:"Play snake",
-    back:"← back",
-    // about
-    a_title:"About me", a_sub:"a bit about me",
-    a_text1:"My interest in digital work started in 2020, when I completed a Higher National Certificate in Digital Design and Web Development. At the time, I thought web development might be the direction I wanted to go in, but I quickly realised I was more drawn to the creative and visual side of digital work.",
-    a_text2:"That led me to study game development, which became a really fun and eye-opening experience. I worked with Unity to create both 2D and 3D games, but I especially enjoyed 3D projects because they let me combine creativity, problem-solving, design, and technical skills.",
-    a_text3:"After graduating, my path moved into website content, CMS work, and e-commerce migrations. It might seem like a different direction, but it still connects to the things I enjoy: working with digital platforms, improving layouts, organising information, and making online experiences clearer and easier to use.",
-    a_facts:[["📍","Location","Wrocław, Poland"],["💼","Role","Content & CMS Specialist"],["🎮","Background","BSc Computer Games Development — Distinction"],["💬","Languages","Polish (native) · English C1"],["✉️","Email","karolina.content@outlook.com"]],
-    // work
-    w_title:"My work",w_sub:"what I do",
-    w_intro:"I work with website content, product information, and CMS updates, making sure pages are accurate, consistent, and easy to use. My day-to-day work involves updating content, checking details, organising information, supporting content governance, and helping improve e-commerce websites.\n\nI also support practical design and content tasks when needed, from quick graphic edits to preparing visuals that help projects move smoothly. I've worked with tools such as Screaming Frog, Google Analytics, Miro, Figma, Canva, photo editing tools, CMS platforms, Azure DevOps, and AI tools to support research, content checks, and everyday workflow tasks.\n\nI'm interested in how small content, layout, and usability improvements can make websites clearer and easier to navigate. I'm still developing my experience, but I'm motivated to keep learning and take on more responsibility within digital content, CMS, e-commerce, and user-focused website roles.",
-    w_exp:[
-      {role:"Content Specialist",date:"2025 — Present",company:"",bullets:["Managed B2B/B2C e-commerce content for SEO, consistency, and UX","Supported CMS updates, redesigns, restructuring, and content migration","Audited content to fix SEO gaps, broken links, and metadata issues"]},
-      {role:"Content Intern",date:"2024 — 2025",company:"",bullets:["Assisted with B2B/B2C product content updates, ensuring accuracy, consistency, and SEO alignment","Supported CMS content migration, page setup, and content structuring during platform updates","Contributed to UAT, website maintenance tasks, and update tracking in Azure DevOps"]}
-    ],
-    w_edu_h:"",
-    w_edu:[],
-    w_skills_h:"Skills",
-    w_skills:["CMS management","Content governance","Basic HTML & CSS","SEO metadata optimisation","Miro","Airtable","Accessibility-focused content updates","Content auditing","Azure DevOps","Lean-Agile","Screaming Frog","Google Analytics","Figma","Canva"],
-    // learn
-    l_title:"Learning",l_sub:"always, at my own pace",
-    l_courses:[
-      {name:"Figma",detail:"UX/UI design, prototyping, components",w:55,badge:"lb-on",bl:"In progress"},
-      {name:"Google Analytics",detail:"Understanding how content performs",w:40,badge:"lb-on",bl:"In progress"},
-      {name:"UX design principles",detail:"Self-directed study",w:40,badge:"lb-on",bl:"In progress"},
-      {name:"UX writing",detail:"Self-directed study",w:35,badge:"lb-on",bl:"In progress"},
-      {name:"Web accessibility",detail:"Self-directed study",w:35,badge:"lb-on",bl:"In progress"},
-      {name:"SAFe® Practitioner",detail:"Scaled Agile · 2026",w:100,badge:"lb-done",bl:"Done ✓"},
-      {name:"Anthropic Academy",detail:"Claude 101, API, Agent Skills, AI Fluency",w:100,badge:"lb-done",bl:"Done ✓"}
-    ],
-    // game
-    g_title:"snake ✦",g_score:"score",g_start:"start",g_restart:"play again",
-    g_over:"game over!",g_ready:"press start",g_ctrl:"arrow keys or wasd",g_back:"← back"
-  },
-  pl:{
-    hi:"cześć, znalazłaś/eś mnie ✦",
-    name:"Karolina Oszust",
-    role:"Content & CMS Specialist · Wrocław",
-    email:"karolina.content@outlook.com",
-    d_about:"O mnie", d_work:"Moja praca", d_learn:"Uczę się", d_game:"Zagraj w węża",
-    back:"← wróć",
-    a_title:"O mnie", a_sub:"trochę o mnie",
-    a_text1:"Moje zainteresowanie pracą digital zaczęło się w 2020 roku, kiedy ukończyłam Higher National Certificate z Digital Design and Web Development. Na początku myślałam, że pójdę bardziej w stronę web developmentu, ale szybko zrozumiałam, że bardziej przyciąga mnie kreatywna i wizualna strona pracy cyfrowej.",
-    a_text2:"Dlatego zdecydowałam się studiować game development, co okazało się bardzo ciekawym i rozwijającym doświadczeniem. Pracowałam w Unity, tworząc gry 2D i 3D, ale to projekty 3D najbardziej mnie wciągnęły, bo łączyły kreatywność, projektowanie, rozwiązywanie problemów i techniczne myślenie. Dzięki temu poznałam też wiele nowych narzędzi, od silników gier po modelowanie 3D i animację.",
-    a_text3:"Po studiach moja ścieżka zawodowa przesunęła się w stronę treści internetowych, pracy z CMS i migracji e-commerce. Może brzmieć to jak inny kierunek, ale nadal łączy się z tym, co lubię: pracą z platformami digital, poprawianiem układów stron, organizowaniem informacji i tworzeniem bardziej przejrzystych, przyjaznych doświadczeń online.",
-    a_facts:[["📍","Miasto","Wrocław, Polska"],["💼","Stanowisko","Content & CMS Specialist"],["🎮","Background","BSc Computer Games Development — z wyróżnieniem"],["💬","Języki","Polski (ojczysty) · Angielski C1"],["✉️","Email","karolina.content@outlook.com"]],
-    w_title:"Moja praca",w_sub:"co robię",
-    w_intro:"Pracuję z treściami na stronach internetowych, informacjami produktowymi i aktualizacjami w CMS, dbając o to, żeby strony były dokładne, spójne i łatwe w użyciu. Na co dzień zajmuję się aktualizacją treści, sprawdzaniem szczegółów, organizowaniem informacji, wspieraniem content governance oraz ulepszaniem stron e-commerce.\n\nW razie potrzeby wspieram też praktyczne zadania związane z designem i treściami — od szybkich edycji graficznych po przygotowywanie materiałów wizualnych, które pomagają projektom i codziennym zadaniom iść sprawniej. Pracowałam z narzędziami takimi jak Screaming Frog, Google Analytics, Miro, Figma, Canva, różne edytory zdjęć, platformy CMS, Azure DevOps oraz narzędzia AI, które wspierają research, sprawdzanie treści i codzienną organizację pracy.\n\nInteresuje mnie to, jak drobne zmiany w treści, układzie strony i użyteczności mogą sprawić, że strony internetowe stają się bardziej przejrzyste i łatwiejsze w nawigacji. Lubię uczyć się, jak strony są zarządzane od środka, i rozwijać swoje umiejętności w obszarach takich jak UX, dostępność, analityka i digital design.\n\nNadal rozwijam swoje doświadczenie, ale jestem zmotywowana, żeby dalej się uczyć i brać na siebie więcej odpowiedzialności w obszarze digital content, CMS, e-commerce i ról związanych z tworzeniem bardziej przyjaznych doświadczeń online. Dobrze odnajduję się też w środowisku Agile i we współpracy przy różnych zadaniach, narzędziach i zespołach.",
-    w_exp:[
-      {role:"Content Specialist",date:"2025 — obecnie",company:"",bullets:["Zarządzanie treściami B2B/B2C pod kątem SEO, spójności i UX","Wsparcie przy aktualizacjach CMS, redesignach i migracjach treści","Audyty treści — identyfikacja luk SEO, broken links i problemów z metadata"]},
-      {role:"Content Intern",date:"2024 — 2025",company:"",bullets:["Wsparcie przy aktualizacjach treści produktowych B2B/B2C","Pomoc przy migracji CMS, konfiguracji stron i strukturyzowaniu treści","Udział w UAT, utrzymaniu stron i śledzeniu zadań w Azure DevOps"]}
-    ],
-    w_edu_h:"",
-    w_edu:[],
-    w_skills_h:"Umiejętności",
-    w_skills:["Zarządzanie CMS","Content governance","Podstawy HTML i CSS","Optymalizacja metadata SEO","Miro","Airtable","Dostępność w treściach","Audyty treści","Azure DevOps","Lean-Agile","Screaming Frog","Google Analytics","Figma","Canva"],
-    l_title:"Uczę się",l_sub:"zawsze, we własnym tempie",
-    l_courses:[
-      {name:"Figma",detail:"projektowanie UX/UI, prototypowanie, komponenty",w:55,badge:"lb-on",bl:"W trakcie"},
-      {name:"Google Analytics",detail:"podstawy analityki",w:40,badge:"lb-on",bl:"W trakcie"},
-      {name:"Zasady UX design",detail:"nauka własna",w:40,badge:"lb-on",bl:"W trakcie"},
-      {name:"UX writing",detail:"nauka własna",w:35,badge:"lb-on",bl:"W trakcie"},
-      {name:"Dostępność w internecie",detail:"nauka własna",w:35,badge:"lb-on",bl:"W trakcie"},
-      {name:"SAFe® Practitioner",detail:"Scaled Agile · 2026",w:100,badge:"lb-done",bl:"Ukończono ✓"},
-      {name:"Anthropic Academy",detail:"Claude 101, API, Agent Skills, AI Fluency",w:100,badge:"lb-done",bl:"Ukończono ✓"}
-    ],
-    g_title:"wąż ✦",g_score:"wynik",g_start:"start",g_restart:"zagraj ponownie",
-    g_over:"koniec gry!",g_ready:"naciśnij start",g_ctrl:"strzałki lub wasd",g_back:"← wróć"
+  /* =========================================================== */
+  /*  CONFIG — edit these four lines and you're done.            */
+  /* =========================================================== */
+  const CONFIG = {
+    youTubeId : "",                       // e.g. "dQw4w9WgXcQ" (the bit after ?v= in a YouTube URL)
+    email     : "your.email@example.com",
+    github    : "",                       // e.g. "https://github.com/yourname"
+    linkedin  : ""                        // e.g. "https://linkedin.com/in/yourname"
+  };
+
+  // ---- video ----
+  if (CONFIG.youTubeId) {
+    const v = document.getElementById("player-video");
+    v.outerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + CONFIG.youTubeId +
+      '" title="Final-year game project walkthrough" allow="accelerometer; autoplay; ' +
+      'clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
   }
-};
-let lang='en';
-function t(k){return T[lang][k];}
 
-function setLang(l){
-  lang=l;
-  document.querySelectorAll('.lbtn').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
-  renderTitle();
-  if(currentPanel) renderPanel(currentPanel);
-}
+  // ---- contact ----
+  const mail = document.getElementById("mail");
+  mail.textContent = CONFIG.email;
+  mail.href = "mailto:" + CONFIG.email;
+  const gh = document.getElementById("gh"), li = document.getElementById("li");
+  if (CONFIG.github)  gh.href = CONFIG.github;   else gh.style.display = "none";
+  if (CONFIG.linkedin) li.href = CONFIG.linkedin; else li.style.display = "none";
 
-/* ── RENDER TITLE ── */
-function renderTitle(){
-  document.getElementById('t-hi').textContent=t('hi');
-  document.getElementById('t-name').textContent=t('name');
-  document.getElementById('t-role').textContent=t('role');
-  document.getElementById('t-email').textContent=t('email');
-  document.getElementById('d-about').textContent=t('d_about');
-  document.getElementById('d-work').textContent=t('d_work');
-  document.getElementById('d-learn').textContent=t('d_learn');
-  document.getElementById('d-game').textContent=t('d_game');
-  document.getElementById('back-label').textContent=t('back');
-  document.getElementById('game-back-label').textContent=t('g_back');
-}
+  // ---- the playable character ----
+  (function(){
+    const stage  = document.getElementById("stage");
+    const player = document.getElementById("player");
+    const hint   = document.getElementById("hint");
+    const W = 30, STEP = 26;
+    let x = 2, active = false, dragging = false, dragStartX = 0, dragStartPointer = 0, moved = 0;
 
-/* ── STARS ── */
-function makeStars(){
-  const c=document.getElementById('stars');
-  const emojis=['✦','✧','★','✸','·','˙'];
-  for(let i=0;i<28;i++){
-    const s=document.createElement('span');
-    s.className='star';
-    s.textContent=emojis[Math.floor(Math.random()*emojis.length)];
-    s.style.left=Math.random()*100+'%';
-    s.style.top=Math.random()*100+'%';
-    s.style.setProperty('--d',(2+Math.random()*4)+'s');
-    s.style.setProperty('--sz',(.5+Math.random()*.8)+'rem');
-    s.style.animationDelay=Math.random()*4+'s';
-    s.style.color=['#C4B4E0','#E88AB0','#A8C0A0','#D4C860','#D4C0EC'][Math.floor(Math.random()*5)];
-    c.appendChild(s);
-  }
-}
+    const maxX = () => Math.max(0, stage.clientWidth - W);
+    const place = () => { player.style.left = x + "px"; };
+    const clamp = v => Math.min(maxX(), Math.max(0, v));
 
-/* ── PANEL CONTENT ── */
-let currentPanel=null;
+    function hop(){
+      player.classList.remove("hop");   // restart animation
+      void player.offsetWidth;
+      player.classList.add("hop");
+    }
+    function fadeHint(){ if(hint){ hint.style.transition="opacity .6s"; hint.style.opacity="0"; } }
 
-function buildAbout(){
-  return `
-    <div class="panel-stripe about-stripe"></div>
-    <div class="panel-body">
-      <div class="panel-title">${t('a_title')} <em>✦</em></div>
-      <div class="panel-sub">${t('a_sub')}</div>
-      <div class="about-intro">
-        <p>${t('a_text1')}</p>
-        <p style="margin-top:.8em">${t('a_text2')}</p>
-        <p style="margin-top:.8em">${t('a_text3')}</p>
-      </div>
-      <ul class="fact-list">
-        ${t('a_facts').map(f=>`<li class="fact-li"><span class="fact-ico">${f[0]}</span><div><span class="fact-k">${f[1]}</span><span class="fact-v">${f[2]}</span></div></li>`).join('')}
-      </ul>
-    </div>`;
-}
+    // keyboard (only while the toy is focused, so page scrolling stays normal)
+    player.addEventListener("focus", () => active = true);
+    player.addEventListener("blur",  () => active = false);
+    player.addEventListener("keydown", (e) => {
+      if (!active) return;
+      if (e.key === "ArrowLeft")  { x = clamp(x - STEP); place(); fadeHint(); e.preventDefault(); }
+      else if (e.key === "ArrowRight") { x = clamp(x + STEP); place(); fadeHint(); e.preventDefault(); }
+      else if (e.key === "ArrowUp" || e.key === " ") { hop(); fadeHint(); e.preventDefault(); }
+    });
 
-function buildWork(){
-  const introParas=t('w_intro').split('\n\n').map(p=>`<p style="margin-bottom:.8em">${p}</p>`).join('');
-  const exp=t('w_exp').map(e=>`
-    <div class="work-item">
-      <div class="work-head"><div class="work-role">${e.role}</div><div class="work-date">${e.date}</div></div>
-      <div style="font-size:10px;color:var(--soft);letter-spacing:.5px;margin-bottom:6px;">${e.company}</div>
-      <ul class="work-bullets">${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
-    </div>`).join('');
-  const edu=t('w_edu').map(e=>`
-    <div class="edu-item">
-      <div class="edu-head"><div class="edu-q">${e.q}</div><div class="edu-date">${e.date}</div></div>
-      <div class="edu-where">${e.where}</div>
-      <div class="edu-note">${e.note}</div>
-    </div>`).join('');
-  const chips=t('w_skills').map(s=>`<span class="chip">${s}</span>`).join('');
-  return `
-    <div class="panel-stripe work-stripe"></div>
-    <div class="panel-body">
-      <div class="panel-title">${t('w_title')}</div>
-      <div class="panel-sub">${t('w_sub')}</div>
-      <div class="about-intro" style="margin-bottom:24px;">${introParas}</div>
-      ${exp}
-      <div style="margin-top:24px;font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--soft);margin-bottom:12px;">${t('w_edu_h')}</div>
-      ${edu}
-      <div style="margin-top:24px;font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--soft);margin-bottom:8px;">${t('w_skills_h')}</div>
-      <div class="chips">${chips}</div>
-    </div>`;
-}
+    // pointer / touch: drag to walk, tap to hop
+    player.addEventListener("pointerdown", (e) => {
+      dragging = true; moved = 0; dragStartX = x; dragStartPointer = e.clientX;
+      player.setPointerCapture(e.pointerId); player.style.transition = "none";
+    });
+    player.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      const d = e.clientX - dragStartPointer; moved = Math.max(moved, Math.abs(d));
+      x = clamp(dragStartX + d); place();
+    });
+    player.addEventListener("pointerup", (e) => {
+      dragging = false; player.style.transition = "";
+      if (moved < 4) hop();               // a tap = a hop
+      else fadeHint();
+      try { player.releasePointerCapture(e.pointerId); } catch(_){}
+    });
 
-function buildLearn(){
-  const rows=t('l_courses').map(c=>`
-    <div class="learn-row" data-w="${c.w}">
-      <div><div class="learn-name">${c.name}</div><div class="learn-detail">${c.detail}</div><div class="learn-prog"><div class="learn-fill" style="width:0%" data-w="${c.w}"></div></div></div>
-      <div class="lbadge ${c.badge}">${c.bl}</div>
-    </div>`).join('');
-  return `
-    <div class="panel-stripe learn-stripe"></div>
-    <div class="panel-body">
-      <div class="panel-title">${t('l_title')} <em>✦</em></div>
-      <div class="panel-sub">${t('l_sub')}</div>
-      ${rows}
-    </div>`;
-}
-
-function buildNow(){
-  const rows=t('n_nows').map(n=>`
-    <div class="now-row">
-      <div class="now-lbl">${n.lbl}</div>
-      <div class="now-txt">${n.txt}</div>
-    </div>`).join('');
-  return `
-    <div class="panel-stripe now-stripe"></div>
-    <div class="panel-body">
-      <div class="panel-title">${t('n_title')} <em>✦</em></div>
-      <div class="panel-sub">${t('n_sub')}</div>
-      ${rows}
-    </div>`;
-}
-
-function renderPanel(which){
-  const wrap=document.getElementById('panel-wrap');
-  if(which==='about') wrap.innerHTML=buildAbout();
-  else if(which==='work') wrap.innerHTML=buildWork();
-  else if(which==='learn') wrap.innerHTML=buildLearn();
-  else if(which==='now') wrap.innerHTML=buildNow();
-  // animate progress bars
-  setTimeout(()=>{
-    wrap.querySelectorAll('.learn-fill').forEach(b=>{b.style.width=b.dataset.w+'%';});
-  },150);
-}
-
-function openPanel(which){
-  currentPanel=which;
-  renderPanel(which);
-  document.getElementById('s-title').classList.add('hidden');
-  document.getElementById('s-panel').classList.remove('hidden');
-  document.getElementById('panel-wrap').scrollTop=0;
-}
-
-function openGame(){
-  document.getElementById('s-title').classList.add('hidden');
-  document.getElementById('s-game').classList.remove('hidden');
-  renderGameUI();
-  drawIdle();
-}
-
-function goBack(){
-  document.getElementById('s-panel').classList.add('hidden');
-  document.getElementById('s-game').classList.add('hidden');
-  document.getElementById('s-title').classList.remove('hidden');
-  currentPanel=null;
-  if(gameLoop){clearInterval(gameLoop);gameLoop=null;gameRunning=false;}
-}
-
-function renderGameUI(){
-  document.getElementById('game-title-t').textContent=t('g_title');
-  document.getElementById('g-score-lbl').textContent=t('g_score');
-  document.getElementById('startBtn').textContent=t('g_start');
-  document.getElementById('g-ctrl').textContent=t('g_ctrl');
-}
-
-/* ── CURSOR ── */
-const cur=document.getElementById('cur');
-const cursors=['✦','✧','★','·'];let ci=0;
-document.addEventListener('mousemove',e=>{
-  cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
-});
-document.querySelectorAll('.door').forEach(d=>{
-  d.addEventListener('mouseenter',()=>{cur.textContent='→';});
-  d.addEventListener('mouseleave',()=>{cur.textContent='✦';});
-});
-
-/* ── SNAKE ── */
-const canvas=document.getElementById('snakeCanvas');
-const ctx=canvas?canvas.getContext('2d'):null;
-const CELL=14,COLS=20,ROWS=20;
-if(canvas){canvas.width=CELL*COLS;canvas.height=CELL*ROWS;}
-const SC={bg:'#C49098',grid:'rgba(255,240,244,.12)',head:'#FDF0F2',body:['#EDD4DC','#8B2040','#C96080'],food:'#FDF0F4'};
-let snake,dir,nextDir,food,score=0,gameRunning=false,gameOver=false,gameLoop;
-function initGame(){snake=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];dir={x:1,y:0};nextDir={x:1,y:0};score=0;gameOver=false;placeFood();document.getElementById('scoreDisplay').textContent='0';}
-function placeFood(){let p;do{p={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)};}while(snake.some(s=>s.x===p.x&&s.y===p.y));food=p;}
-function drawGame(){if(!ctx)return;ctx.fillStyle=SC.bg;ctx.fillRect(0,0,canvas.width,canvas.height);ctx.strokeStyle=SC.grid;ctx.lineWidth=.5;for(let x=0;x<=COLS;x++){ctx.beginPath();ctx.moveTo(x*CELL,0);ctx.lineTo(x*CELL,canvas.height);ctx.stroke();}for(let y=0;y<=ROWS;y++){ctx.beginPath();ctx.moveTo(0,y*CELL);ctx.lineTo(canvas.width,y*CELL);ctx.stroke();}ctx.fillStyle=SC.food;ctx.font=`bold ${CELL+2}px serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('✦',food.x*CELL+CELL/2,food.y*CELL+CELL/2+1);snake.forEach((seg,i)=>{ctx.fillStyle=i===0?SC.head:SC.body[i%SC.body.length];const pad=i===0?1:2,x=seg.x*CELL+pad,y=seg.y*CELL+pad,w=CELL-pad*2,h=CELL-pad*2,r=3;ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();ctx.fill();});}
-function step(){dir=nextDir;const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};if(head.x<0||head.x>=COLS||head.y<0||head.y>=ROWS||snake.some(s=>s.x===head.x&&s.y===head.y)){endGame();return;}snake.unshift(head);if(head.x===food.x&&head.y===food.y){score++;document.getElementById('scoreDisplay').textContent=score;placeFood();}else snake.pop();drawGame();}
-function startGame(){if(gameLoop)clearInterval(gameLoop);initGame();gameRunning=true;gameOver=false;drawGame();gameLoop=setInterval(step,130);document.getElementById('startBtn').textContent=t('g_restart');}
-function endGame(){clearInterval(gameLoop);gameRunning=false;gameOver=true;if(ctx){ctx.fillStyle='rgba(30,16,48,.85)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#E0D4F4';ctx.font=`bold 15px 'DM Mono',monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(t('g_over'),canvas.width/2,canvas.height/2-10);ctx.font=`11px 'DM Mono',monospace`;ctx.fillStyle='rgba(196,180,224,.6)';ctx.fillText(`${t('g_score')}: ${score}`,canvas.width/2,canvas.height/2+12);}document.getElementById('startBtn').textContent=t('g_restart');}
-function drawIdle(){if(!ctx)return;ctx.fillStyle=SC.bg;ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle=SC.food;ctx.font='bold 22px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('✦',canvas.width/2,canvas.height/2);}
-document.addEventListener('keydown',e=>{if(!gameRunning)return;const m={'ArrowUp':{x:0,y:-1},'ArrowDown':{x:0,y:1},'ArrowLeft':{x:-1,y:0},'ArrowRight':{x:1,y:0},'w':{x:0,y:-1},'s':{x:0,y:1},'a':{x:-1,y:0},'d':{x:1,y:0},'W':{x:0,y:-1},'S':{x:0,y:1},'A':{x:-1,y:0},'D':{x:1,y:0}};const nd=m[e.key];if(nd&&!(nd.x===-dir.x&&nd.y===-dir.y))nextDir=nd;if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key))e.preventDefault();});
-function dpadDir(d){if(!gameRunning)return;const m={UP:{x:0,y:-1},DOWN:{x:0,y:1},LEFT:{x:-1,y:0},RIGHT:{x:1,y:0}};const nd=m[d];if(nd&&!(nd.x===-dir.x&&nd.y===-dir.y))nextDir=nd;}
-
-/* ── INIT ── */
-makeStars();
-renderTitle();
+    window.addEventListener("resize", () => { x = clamp(x); place(); });
+    place();
+  })();
 </script>
 </body>
 </html>
