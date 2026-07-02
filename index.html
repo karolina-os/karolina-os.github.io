@@ -6,7 +6,6 @@
 <title>Karolina Oszust</title>
 <meta name="description" content="Karolina Oszust — I keep websites working and looking good, and I like games.">
 
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -96,6 +95,7 @@
   .sec-title{
     font-size:clamp(2.2rem,7vw,4.5rem);
     font-weight:600;letter-spacing:-.03em;margin:0 0 2.2rem;
+    text-align:center;
   }
   .sec-title em{font-style:normal;color:var(--rose);}
 
@@ -201,7 +201,7 @@
   @keyframes dip{0%,100%{transform:translateY(0);opacity:.55;}50%{transform:translateY(9px);opacity:.25;}}
 
   /* ================== work ================== */
-  .frame-link{display:block;text-decoration:none;}
+  .frame-wrap{max-width:600px;margin:0 auto;width:100%;}
   .frame{
     position:relative;aspect-ratio:16/9;width:100%;
     background:#F0EDE8;border:1px solid rgba(30,27,25,.28);border-radius:10px;
@@ -237,13 +237,21 @@
   }
   .work-meta b{color:var(--ink);font-weight:500;}
   .work-meta .yr{color:var(--rose);}
-  .work-note{margin-top:1.8rem;font-size:1rem;color:var(--ink);max-width:56ch;}
-  .work-tags{display:flex;flex-wrap:wrap;gap:1.2rem;margin-top:1.2rem;font-size:.85rem;color:var(--muted);}
+  .work-note{
+    margin:2rem auto 0;max-width:54ch;
+    font-size:1rem;color:var(--ink);text-align:center;
+  }
+  .work-tags{
+    display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:center;
+    margin-top:1.4rem;font-size:.85rem;color:var(--muted);
+  }
 
   /* ================== about ================== */
-  .cols{display:grid;gap:2rem;grid-template-columns:1fr;}
-  @media(min-width:720px){.cols{grid-template-columns:1fr 1fr;}.cols .late{margin-top:5rem;}}
-  .cols p{margin:0;font-size:1rem;}
+  .about-flow{
+    max-width:58ch;margin:0 auto;
+    display:flex;flex-direction:column;gap:1.4rem;
+  }
+  .about-flow p{margin:0;font-size:1rem;}
 
   /* ================== contact ================== */
   .contact-inner{text-align:center;}
@@ -353,7 +361,7 @@
               </div>
             </div>
             <div class="work-meta">
-              <span><b>[Whiskers of the North]</b> — final year project, made in unity</span>
+              <span><b>Whiskers of the North</b> — final year project, made in unity</span>
               <span class="yr">2024</span>
             </div>
           </div>
@@ -368,11 +376,11 @@
       <section id="about">
         <div class="inner">
           <h2 class="sec-title">about<em>.</em></h2>
-          <div class="cols">
-            <p>I currently work in web content and QA, looking after a large e-commerce websites. My role involves testing pages, finding bugs and broken links, migrating content, building new pages, and keeping everything accurate, consistent and easy to use.</p>
-            <p class="late">i have always been interested in how games work and how they are made, which led me to study Games Development. I explored different areas of design and development, including writing GDDs, planning levels, developing stories, building prototypes and creating environments in Unity.</p>
-            <p>I also learned the basics of 3D modelling in Autodesk Maya, working on everything from simple objects to furniture and character-style modelling. Not every idea or project was perfect, but each one became a valuable learning experience and helped me better understand the process of creating games..</p>
-            <p class="late">lately, I have become increasingly interested in UX/UI design and started learning Figma.</p>
+          <div class="about-flow">
+            <p>I currently work in web content and QA, looking after large e-commerce websites. My role involves testing pages, finding bugs and broken links, migrating content, building new pages, and keeping everything accurate, consistent and easy to use.</p>
+            <p>I have always been interested in how games work and how they are made, which led me to study Games Development. I explored different areas of design and development, including writing GDDs, planning levels, developing stories, building prototypes and creating environments in Unity.</p>
+            <p>I also learned the basics of 3D modelling in Autodesk Maya, working on everything from simple objects to furniture and character-style modelling. Not every idea or project was perfect, but each one became a valuable learning experience and helped me better understand the process of creating games.</p>
+            <p>Lately, I have become increasingly interested in UX/UI design and started learning Figma.</p>
           </div>
         </div>
       </section>
@@ -397,22 +405,25 @@
 
 <script>
   /* =========================================================== */
-  
+  /*  CONFIG — your details                                      */
   /* =========================================================== */
   const CONFIG = {
-    youTubeId : "UfIxBbL6II8",                       // YouTube URL
-    email     : " karolinaoszust@outlook.com",
+    youTubeId : "UfIxBbL6II8",              // the bit after ?v= in your YouTube URL
+    email     : "karolinaoszust@outlook.com",
+    github    : "",                          // e.g. "https://github.com/yourname"
+    linkedin  : "",                          // e.g. "https://linkedin.com/in/yourname"
+    webGames  : ""                           // optional: itch.io / repo link
   };
 
-// text for audience
+  /* ---- text for each audience ---- */
   const PITCHES = {
     anyone: {
       main : 'i keep websites working and looking good. <em>and i make games.</em>',
       sub  : 'based in wrocław, poland'
     },
     recruiters: {
-      main : 'web content &amp; qa specialist with a games development degree. <em>detail-obsessed.</em>',
-      sub  : 'testing, bug hunting and content work on a large e-commerce platforms — plus unity &amp; c# from my bsc (distinction)'
+      main : 'web content specialist with a games development degree. <em>detail-obsessed.</em>',
+      sub  : 'testing, bug hunting and content work on large e-commerce platforms'
     }
   };
 
@@ -623,3 +634,4 @@
 </script>
 </body>
 </html>
+
